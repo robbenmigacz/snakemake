@@ -44,8 +44,8 @@ sinfo:
 # munge log: /var/log/munge/munged.log
 test:
 	@printf ">>> Checking munge keys on both machines\n"
-	@vagrant ssh slurmmaster -- -t 'sudo md5sum /etc/munge/munge.key; ls -l /etc/munge/munge.key'
-	@vagrant ssh server -- -t 'sudo md5sum /etc/munge/munge.key; ls -l /etc/munge/munge.key'
+	@vagrant ssh slurmmaster -- -t 'sudo sha256sum /etc/munge/munge.key; ls -l /etc/munge/munge.key'
+	@vagrant ssh server -- -t 'sudo sha256sum /etc/munge/munge.key; ls -l /etc/munge/munge.key'
 	@printf "\n\n>>> Checking if slurmmaster can contact node (network)\n"
 	@vagrant ssh slurmmaster -- -t 'ping 10.10.10.4 -c1'
 	@printf "\n\n>>> Checking if SLURM slurmmaster is running\n"

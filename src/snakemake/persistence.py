@@ -527,22 +527,22 @@ class Persistence(PersistenceExecutorInterface):
     def _software_stack_hash(self, job):
         # TODO move code for retrieval into software deployment plugin interface once
         # available
-        md5hash = hashlib.md5()
+        sha256hash = hashlib.sha256()
         if (
             DeploymentMethod.CONDA
             in self.dag.workflow.deployment_settings.deployment_method
             and job.conda_env
         ):
-            md5hash.update(job.conda_env.hash.encode())
+            sha256hash.update(job.conda_env.hash.encode())
         if (
             DeploymentMethod.APPTAINER
             in self.dag.workflow.deployment_settings.deployment_method
             and job.container_img_url
         ):
-            md5hash.update(job.container_img_url.encode())
+            sha256hash.update(job.container_img_url.encode())
         if job.env_modules:
-            md5hash.update(job.env_modules.hash.encode())
-        return md5hash.hexdigest()
+            sha256hash.update(job.env_modules.hash.encode())
+        return sha256hash.hexdigest()
 
     @contextmanager
     def noop(self, *args):

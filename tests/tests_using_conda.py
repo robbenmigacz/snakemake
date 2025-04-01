@@ -34,7 +34,7 @@ def test_script():
     run(
         dpath("test_script"),
         deployment_method={DeploymentMethod.CONDA},
-        check_md5=False,
+        check_sha256=False,
     )
 
 
@@ -44,7 +44,7 @@ def test_script_rs():
     run(
         dpath("test_script_rs"),
         deployment_method={DeploymentMethod.CONDA},
-        check_md5=False,
+        check_sha256=False,
     )
 
 

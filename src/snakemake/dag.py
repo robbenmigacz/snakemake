@@ -376,7 +376,7 @@ class DAG(DAGExecutorInterface, DAGReportInterface):
             )
         }
 
-        # Then based on md5sum values
+        # Then based on sha256sum values
         for env_spec, simg_url in env_set:
             simg = None
             if simg_url and (

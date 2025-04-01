@@ -604,7 +604,7 @@ The function will return the checksum of ``file`` present in ``infile``.
 
     rule a:
 	input:
-	    checksum="samples.md5",
+	    checksum="samples.sha256",
         output:
             tsv="{a}.tsv",
         params:

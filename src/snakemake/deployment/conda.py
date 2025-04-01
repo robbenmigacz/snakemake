@@ -235,11 +235,11 @@ class Env:
         return self._content_hash
 
     def _get_hash(self, include_location: bool, include_container_img: bool) -> str:
-        md5hash = hashlib.md5()
+        sha256hash = hashlib.sha256()
         if self.name:
-            md5hash.update(self.name.encode())
+            sha256hash.update(self.name.encode())
         elif self.dir:
-            md5hash.update(self.dir.encode())
+            sha256hash.update(self.dir.encode())
         else:
             if include_location:
                 # Include the absolute path of the target env dir into the hash.
@@ -247,17 +247,17 @@ class Env:
                 # invalidates all environments. This is necessary, because binaries
                 # in conda environments can contain hardcoded absolute RPATHs.
                 env_dir = os.path.realpath(self._envs_dir)
-                md5hash.update(env_dir.encode())
+                sha256hash.update(env_dir.encode())
             if include_container_img and self._container_img:
-                md5hash.update(self._container_img.url.encode())
+                sha256hash.update(self._container_img.url.encode())
             content_deploy = self.content_deploy
             if content_deploy:
-                md5hash.update(content_deploy)
+                sha256hash.update(content_deploy)
             content_pin = self.content_pin
             if content_pin:
-                md5hash.update(content_pin)
-            md5hash.update(self.content)
-        return md5hash.hexdigest()
+                sha256hash.update(content_pin)
+            sha256hash.update(self.content)
+        return sha256hash.hexdigest()
 
     @property
     def is_containerized(self):

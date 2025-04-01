@@ -294,7 +294,7 @@ def test_report():
         dpath("test_report"),
         report="report.html",
         report_stylesheet="custom-stylesheet.css",
-        check_md5=False,
+        check_sha256=False,
     )
 
 
@@ -303,15 +303,15 @@ def test_report_href():
 
 
 def test_report_zip():
-    run(dpath("test_report_zip"), report="report.zip", check_md5=False)
+    run(dpath("test_report_zip"), report="report.zip", check_sha256=False)
 
 
 def test_report_dir():
-    run(dpath("test_report_dir"), report="report.zip", check_md5=False)
+    run(dpath("test_report_dir"), report="report.zip", check_sha256=False)
 
 
 def test_report_display_code():
-    run(dpath("test_report_display_code"), report="report.html", check_md5=False)
+    run(dpath("test_report_display_code"), report="report.html", check_sha256=False)
 
 
 @pytest.mark.skipif(ON_MACOS, reason="shuf is not available on macOS")
@@ -321,7 +321,7 @@ def test_report_after_run():
         report="report.html",
         report_after_run=True,
         report_stylesheet="custom-stylesheet.css",
-        check_md5=False,
+        check_sha256=False,
     )
 
 
@@ -435,13 +435,13 @@ def test_wildcard_keyword():
 @skip_on_windows
 @pytest.mark.skipif(ON_MACOS, reason="Requires the stress-ng package")
 def test_benchmark():
-    run(dpath("test_benchmark"), benchmark_extended=True, check_md5=False)
+    run(dpath("test_benchmark"), benchmark_extended=True, check_sha256=False)
 
 
 @skip_on_windows
 @pytest.mark.skipif(ON_MACOS, reason="Requires the stress-ng package")
 def test_benchmark_jsonl():
-    run(dpath("test_benchmark_jsonl"), benchmark_extended=True, check_md5=False)
+    run(dpath("test_benchmark_jsonl"), benchmark_extended=True, check_sha256=False)
 
 
 def test_temp_expand():
@@ -567,7 +567,7 @@ def test_deferred_func_eval():
 
 
 def test_format_params():
-    run(dpath("test_format_params"), check_md5=True)
+    run(dpath("test_format_params"), check_sha256=True)
 
 
 def test_rule_defined_in_for_loop():
@@ -1300,7 +1300,7 @@ def test_tmpdir():
 def test_tmpdir_default():
     # Do not check the content (OS and setup dependent),
     # just check whether everything runs smoothly with the default.
-    run(dpath("test_tmpdir"), check_md5=False)
+    run(dpath("test_tmpdir"), check_sha256=False)
 
 
 def test_issue1284():
@@ -1499,7 +1499,7 @@ def test_generate_unit_tests():
         tmpdir = run(
             dpath("test_generate_unit_tests"),
             generate_unit_tests=".tests/unit",
-            check_md5=False,
+            check_sha256=False,
             cleanup=False,
         )
         sp.check_call(["pytest", ".tests", "-vs"], cwd=tmpdir)
@@ -1662,7 +1662,7 @@ def test_module_report():
         dpath("test_module_report"),
         report="report.html",
         report_stylesheet="custom-stylesheet.css",
-        check_md5=False,
+        check_sha256=False,
     )
 
 
@@ -1793,7 +1793,7 @@ def test_groupid_expand_cluster():
 
 @skip_on_windows
 def test_service_jobs():
-    run(dpath("test_service_jobs"), check_md5=False)
+    run(dpath("test_service_jobs"), check_sha256=False)
 
 
 def test_incomplete_params():
@@ -1883,7 +1883,7 @@ def test_rule_inheritance_globals():
         dpath("test_rule_inheritance_globals"),
         report="report.html",
         targets=["foo.txt"],
-        check_md5=False,
+        check_sha256=False,
     )
 
 

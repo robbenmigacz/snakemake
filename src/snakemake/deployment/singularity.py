@@ -45,9 +45,9 @@ class Image:
 
     @lazy_property
     def hash(self):
-        md5hash = hashlib.md5()
-        md5hash.update(self.url.encode())
-        return md5hash.hexdigest()
+        sha256hash = hashlib.sha256()
+        sha256hash.update(self.url.encode())
+        return sha256hash.hexdigest()
 
     def pull(self, dryrun=False):
         self.singularity.check()

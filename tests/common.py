@@ -35,13 +35,13 @@ def dpath(path):
     return os.path.realpath(join(os.path.dirname(__file__), path))
 
 
-def md5sum(filename, ignore_newlines=False):
+def sha256sum(filename, ignore_newlines=False):
     if ignore_newlines:
         with open(filename, "r", encoding="utf-8", errors="surrogateescape") as f:
             data = f.read().strip().encode("utf8", errors="surrogateescape")
     else:
         data = open(filename, "rb").read().strip()
-    return hashlib.md5(data).hexdigest()
+    return hashlib.sha256(data).hexdigest()
 
 
 # test skipping
@@ -154,7 +154,7 @@ def run(
     snakefile="Snakefile",
     subpath=None,
     no_tmpdir=False,
-    check_md5=True,
+    check_sha256=True,
     check_results=None,
     cores=3,
     nodes=None,
@@ -473,10 +473,10 @@ def run(
             assert os.path.exists(targetfile), 'expected file "{}" not produced'.format(
                 resultfile
             )
-            if check_md5:
-                md5expected = md5sum(expectedfile, ignore_newlines=ON_WINDOWS)
-                md5target = md5sum(targetfile, ignore_newlines=ON_WINDOWS)
-                if md5target != md5expected:
+            if check_sha256:
+                sha256expected = sha256sum(expectedfile, ignore_newlines=ON_WINDOWS)
+                sha256target = sha256sum(targetfile, ignore_newlines=ON_WINDOWS)
+                if sha256target != sha256expected:
                     with open(expectedfile) as expected:
                         expected_content = expected.read().strip()
                     with open(targetfile) as target:
